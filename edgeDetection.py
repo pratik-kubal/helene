@@ -8,31 +8,38 @@ TO DO:
     Need to check if the window is using pad digits or not
     Nomalize the black values
 """
-from functions.py import rgbToGrayscale,sliceMat,windowMult
+from functions import rgbToGrayscale,windowMult,padMat,sliceMat,normImage,getShape,invertMat
 import numpy as np
 import cv2
 
 a = cv2.imread("./proj1_cse573/task1.png")
 b = rgbToGrayscale(a)
 
-#def normNeg(matA):
-
-sobel_op_x = [[-1,0,1],
-              [-2,0,2],
+sobel_op_x = [[1,0,-1],
+              [2,0,-2],
               [1,0,-1]]
 sobel_op_y = [[-1,-2,-1],
               [0,0,0],
               [1,2,1]]
 
-resultImage = [[]for i in range(602-3)]
-for window_h in range(0,602-3):
-    holdRow = []
-    for window_w in range(0,902-3):
-        #print(window_h,window_w)
+def sobel(matA,sobel_op):
+    matA = padMat(matA)
+    resultImage = [[]for i in range(600)]
+    for window_h in range(0,600):
+        opResult = 0
+        for window_w in range(0,900):
+            window = sliceMat(matA,window_h,window_h+3,window_w,window_w+3)
+            opResult = windowMult(sobel_op,window)
+        resultImage[window_h].append(opResult)
+    resultImage = normImage(resultImage)
+    return resultImage
+
+resultImage = [[]for i in range(600)]
+for window_h in range(0,getShape(b)[0]-3):
+    opResult =0
+    for window_w in range(0,getShape(b)[1]-3):
         window = sliceMat(b,window_h,window_h+3,window_w,window_w+3)
-        #print("Line:" + str(window_h))
         opResult = windowMult(sobel_op_x,window)
-        #if(opResult < 0): opResult = 0
         resultImage[window_h].append(opResult)
         
 for window_h in range(0,600-1-3):
@@ -48,6 +55,14 @@ for window_h in range(0,600-1-3):
 display = np.asarray(resultImage)
 cv2.namedWindow('image', cv2.WINDOW_NORMAL)
 cv2.imshow('image', display)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# Compare
+edge_x = cv2.Sobel(a, cv2.CV_32F, 1, 0, ksize=3)
+pos_edge_x = np.abs(edge_x) / np.max(np.abs(edge_x))
+cv2.namedWindow('pos_edge_x_dir', cv2.WINDOW_NORMAL)
+cv2.imshow('pos_edge_x_dir', pos_edge_x)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
