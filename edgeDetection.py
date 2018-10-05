@@ -36,7 +36,8 @@ def sobel(matA,sobel_op):
 edge_x = sobel(b,invertMat(sobel_op_x))
 edge_y = sobel(b,invertMat(sobel_op_y))
 
-display = np.asarray(edge_y)
+
+display = np.asarray(test)
 cv2.namedWindow('image', cv2.WINDOW_NORMAL)
 cv2.imshow('image', display)
 cv2.waitKey(0)
