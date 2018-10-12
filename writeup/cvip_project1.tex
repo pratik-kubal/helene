@@ -24,7 +24,6 @@
 	\begin{QandA}
 		\item Edge Dectection
 		\\
-		\\
 			Write programs to detect edges in Fig. 1 (along both x and y directions) using Sobel operator. In your report, please include two resulting images, one showing edges along x direction and the other showing edges along y direction.
 	\begin{answered}
 		For Edge detection firstly I used the basic functions from cv library to read and write. While working on it, previously I had Normalized directly by taking the value 255 as the max value. However, later on I used absolute values method given in "demo.py". Both methods gave similar results.
@@ -201,8 +200,8 @@ print("Resulting image size: {:4d} x {:4d}".format(combined_norm.shape[0], combi
 		\end{verbatim}
 		\end{codelalala}
 		Observations:
-		\\
-		Edge detection along x and y directions have been computed(See Fig \ref{edge-detection}). I have also combined both the edges,see Fig. \ref{edge-detection-combined}. When I was using the old basic divide by 255 normalization, I was missing few edges however, when I used the absolute valued normalization, the results were better.
+        \\
+        Edge detection along x and y directions have been computed(See Fig \ref{edge-detection}). I have also combined both the edges, see Fig. \ref{edge-detection-combined}. When I was using the old basic divide by 255 normalizations, I was missing few edges, however, when I used the absolute-valued normalization, the results were better.
 	\begin{figure}
 		\centering
   			\fbox{\includegraphics[scale=0.25]{./combined.jpg}}
@@ -214,9 +213,6 @@ print("Resulting image size: {:4d} x {:4d}".format(combined_norm.shape[0], combi
 	\\
 	\\
 	Write programs to detect keypoints in an image according to the following steps, which are also the first three steps of Scale-Invariant Feature Transform (SIFT).
-\\
-1.	Generate four octaves. Each octave is composed of five images blurred using Gaussian kernels. For each
-octave, the bandwidth parameters σ (five different scales) of the Gaussian kernels are shown in Tab. 1.
 \begin{answered}
 I am using the method discussed by the TA and used by openCV of multiplying with the constant to generate Gaussian Kernel. The formula for it is as follows:
 \\
@@ -405,111 +401,7 @@ octave1_1 = convolve(windowFilter,octave1)
 octave1_1_norm = np.asarray(octave1_1)
 cv2.imwrite("octave1_1_norm.jpg",octave1_1_norm)
 
-windowFilter = genGaussianKernel(scales,1,2)
-octave1_2 = convolve(windowFilter,octave1)
-octave1_2_norm = np.asarray(octave1_2)
-cv2.imwrite("octave1_2_norm.jpg",octave1_2_norm)
-
-windowFilter = genGaussianKernel(scales,1,3)
-octave1_3 = convolve(windowFilter,octave1)
-octave1_3_norm = np.asarray(octave1_3)
-cv2.imwrite("octave1_3_norm.jpg",octave1_3_norm)
-
-windowFilter = genGaussianKernel(scales,1,4)
-octave1_4 = convolve(windowFilter,octave1)
-octave1_4_norm = np.asarray(octave1_4)
-cv2.imwrite("octave1_4_norm.jpg",octave1_4_norm)
-
-windowFilter = genGaussianKernel(scales,1,5)
-octave1_5 = convolve(windowFilter,octave1)
-octave1_5_norm = np.asarray(octave1_5)
-cv2.imwrite("octave1_5_norm.jpg",octave1_5_norm)
-
-
-octave2 = genOctave(octave1)
-#octave2_norm = np.asarray(octave2)
-#cv2.imwrite("octave2_norm.jpg",octave2_norm)
-windowFilter = genGaussianKernel(scales,2,1)
-octave2_1 = convolve(windowFilter,octave2)
-octave2_1_norm = np.asarray(octave2_1)
-cv2.imwrite("octave2_1_norm.jpg",octave2_1_norm)
-
-windowFilter = genGaussianKernel(scales,2,2)
-octave2_2 = convolve(windowFilter,octave2)
-octave2_2_norm = np.asarray(octave2_2)
-cv2.imwrite("octave2_2_norm.jpg",octave2_2_norm)
-
-windowFilter = genGaussianKernel(scales,2,3)
-octave2_3 = convolve(windowFilter,octave2)
-octave2_3_norm = np.asarray(octave2_3)
-cv2.imwrite("octave2_3_norm.jpg",octave2_3_norm)
-
-windowFilter = genGaussianKernel(scales,2,4)
-octave2_4 = convolve(windowFilter,octave2)
-octave2_4_norm = np.asarray(octave2_4)
-cv2.imwrite("octave2_4_norm.jpg",octave2_4_norm)
-
-windowFilter = genGaussianKernel(scales,2,5)
-octave2_5 = convolve(windowFilter,octave2)
-octave2_5_norm = np.asarray(octave2_5)
-cv2.imwrite("octave2_5_norm.jpg",octave2_5_norm)
-
-
-octave3 = genOctave(octave2)
-#octave3_norm = np.asarray(octave3)
-#cv2.imwrite("octave3_norm.jpg",octave3_norm)
-windowFilter = genGaussianKernel(scales,3,1)
-octave3_1 = convolve(windowFilter,octave3)
-octave3_1_norm = np.asarray(octave3_1)
-cv2.imwrite("octave3_1_norm.jpg",octave3_1_norm)
-
-windowFilter = genGaussianKernel(scales,3,2)
-octave3_2 = convolve(windowFilter,octave3)
-octave3_2_norm = np.asarray(octave3_2)
-cv2.imwrite("octave3_2_norm.jpg",octave3_2_norm)
-
-windowFilter = genGaussianKernel(scales,3,3)
-octave3_3 = convolve(windowFilter,octave3)
-octave3_3_norm = np.asarray(octave3_3)
-cv2.imwrite("octave3_3_norm.jpg",octave3_3_norm)
-
-windowFilter = genGaussianKernel(scales,3,4)
-octave3_4 = convolve(windowFilter,octave3)
-octave3_4_norm = np.asarray(octave3_4)
-cv2.imwrite("octave3_4_norm.jpg",octave3_4_norm)
-
-windowFilter = genGaussianKernel(scales,3,5)
-octave3_5 = convolve(windowFilter,octave3)
-octave3_5_norm = np.asarray(octave3_5)
-cv2.imwrite("octave3_5_norm.jpg",octave3_5_norm)
-
-
-octave4 = genOctave(octave3)
-windowFilter = genGaussianKernel(scales,4,1)
-octave4_1 = convolve(windowFilter,octave4)
-octave4_1_norm = np.asarray(octave4_1)
-cv2.imwrite("octave4_1_norm.jpg",octave4_1_norm)
-
-windowFilter = genGaussianKernel(scales,4,2)
-octave4_2 = convolve(windowFilter,octave4)
-octave4_2_norm = np.asarray(octave4_2)
-cv2.imwrite("octave4_2_norm.jpg",octave4_2_norm)
-
-windowFilter = genGaussianKernel(scales,4,3)
-octave4_3 = convolve(windowFilter,octave4)
-octave4_3_norm = np.asarray(octave4_3)
-cv2.imwrite("octave4_3_norm.jpg",octave4_3_norm)
-
-windowFilter = genGaussianKernel(scales,4,4)
-octave4_4 = convolve(windowFilter,octave4)
-octave4_4_norm = np.asarray(octave4_4)
-cv2.imwrite("octave4_4_norm.jpg",octave4_4_norm)
-
-windowFilter = genGaussianKernel(scales,4,5)
-octave4_5 = convolve(windowFilter,octave4)
-octave4_5_norm = np.asarray(octave4_5)
-cv2.imwrite("octave4_5_norm.jpg",octave4_5_norm)
-
+----- For Each Octave -----
 
 # Difference of Gaussians
 # 2nd arg - 1st arg
@@ -517,66 +409,7 @@ dog1_1 = differenceGaussians(octave1_1,octave1_2)
 dog1_1_norm = np.asarray(dog1_1)
 cv2.imwrite("dog1_1_norm.jpg",dog1_1_norm)
 
-dog1_2 = differenceGaussians(octave1_2,octave1_3)
-dog1_2_norm = np.asarray(dog1_2)
-cv2.imwrite("dog1_2_norm.jpg",dog1_2_norm)
-
-dog1_3 = differenceGaussians(octave1_3,octave1_4)
-dog1_3_norm = np.asarray(dog1_3)
-cv2.imwrite("dog1_3_norm.jpg",dog1_3_norm)
-
-dog1_4 = differenceGaussians(octave1_4,octave1_5)
-dog1_4_norm = np.asarray(dog1_4)
-cv2.imwrite("dog1_4_norm.jpg",dog1_4_norm)
-
-dog2_1 = differenceGaussians(octave2_1,octave2_2)
-dog2_1_norm = np.asarray(dog2_1)
-cv2.imwrite("dog2_1_norm.jpg",dog2_1_norm)
-
-dog2_2 = differenceGaussians(octave2_2,octave2_3)
-dog2_2_norm = np.asarray(dog2_2)
-cv2.imwrite("dog2_2_norm.jpg",dog2_2_norm)
-
-dog2_3 = differenceGaussians(octave2_3,octave2_4)
-dog2_3_norm = np.asarray(dog2_3)
-cv2.imwrite("dog2_3_norm.jpg",dog2_3_norm)
-
-dog2_4 = differenceGaussians(octave2_4,octave2_5)
-dog2_4_norm = np.asarray(dog2_4)
-cv2.imwrite("dog2_4_norm.jpg",dog2_4_norm)
-
-dog3_1 = differenceGaussians(octave3_1,octave3_2)
-dog3_1_norm = np.asarray(dog3_1)
-cv2.imwrite("dog3_1_norm.jpg",dog3_1_norm)
-
-dog3_2 = differenceGaussians(octave3_2,octave3_3)
-dog3_2_norm = np.asarray(dog3_2)
-cv2.imwrite("dog3_2_norm.jpg",dog3_2_norm)
-
-dog3_3 = differenceGaussians(octave3_3,octave3_4)
-dog3_3_norm = np.asarray(dog3_3)
-cv2.imwrite("dog3_3_norm.jpg",dog3_3_norm)
-
-dog3_4 = differenceGaussians(octave3_4,octave3_5)
-dog3_4_norm = np.asarray(dog3_4)
-cv2.imwrite("dog3_4_norm.jpg",dog3_4_norm)
-
-dog4_1 = differenceGaussians(octave4_1,octave4_2)
-dog4_1_norm = np.asarray(dog4_1)
-cv2.imwrite("dog4_1_norm.jpg",dog4_1_norm)
-
-dog4_2 = differenceGaussians(octave4_2,octave4_3)
-dog4_2_norm = np.asarray(dog4_2)
-cv2.imwrite("dog4_2_norm.jpg",dog4_2_norm)
-
-dog4_3 = differenceGaussians(octave4_3,octave4_4)
-dog4_3_norm = np.asarray(dog4_3)
-cv2.imwrite("dog4_3_norm.jpg",dog4_3_norm)
-
-dog4_4 = differenceGaussians(octave4_4,octave4_5)
-dog4_4_norm = np.asarray(dog4_3)
-cv2.imwrite("dog4_4_norm.jpg",dog4_4_norm)
-
+----- For Each Difference of Gaussians -----
 
 # Key Points detection
 outputImage = a.copy()
@@ -585,20 +418,7 @@ keypointsMat1_1 = findMinimaMaxima(stack1_1,outputImage,1,tracker)
 stack1_2 = [dog1_2,dog1_3,dog1_4]
 keypointsMat1_2 = findMinimaMaxima(stack1_2,outputImage,1,tracker)
 
-stack2_1 = [dog2_1,dog2_2,dog2_3]
-keypointsMat2_1 = findMinimaMaxima(stack2_1,outputImage,2,tracker)
-stack2_2 = [dog2_2,dog2_3,dog2_4]
-keypointsMat2_2 = findMinimaMaxima(stack2_2,outputImage,2,tracker)
-
-stack3_1 = [dog3_1,dog3_2,dog3_3]
-keypointsMat2_1 = findMinimaMaxima(stack3_1,outputImage,4,tracker)
-stack3_2 = [dog3_2,dog3_3,dog3_4]
-keypointsMat3_2 = findMinimaMaxima(stack3_2,outputImage,4,tracker)
-
-stack4_1 = [dog4_1,dog4_2,dog4_3]
-keypointsMat2_1 = findMinimaMaxima(stack4_1,outputImage,8,tracker)
-stack4_2 = [dog4_2,dog4_3,dog4_4]
-keypointsMat4_2 = findMinimaMaxima(stack4_2,outputImage,8,tracker)
+----- For Each Keypoint Detection -----
 
 cv2.imwrite("keypoints.jpg",outputImage)
 ecl_distance_sort = sorted(tracker,key=ecl_distance)
@@ -607,13 +427,7 @@ print("Format is (Height,Width) or (y,x)")
 print(ecl_distance_sort[0:5])
 \end{verbatim}
 \end{codelalala}
-\begin{figure}
-		\centering
-  			\fbox{\includegraphics[scale=1.5]{./Gaussian_pyrmd.png}}
-  			\caption{Gaussian Pyramid}
-  		\label{gaussian-blurring}
-\end{figure}
-Each octave is half the previous one therefore function of "genOctave" generates octaves while genGaussianKernel function generates the kernels. The result obtained after blurring is seen in Fig{\ref{gaussian-blurring}} and {\ref{2nd-3rd-oct}} is what the question is asking. The resolution of second octave is 375 by 229 pixels while that of third octave is 118 by 114 pixels. 
+Each octave is half the previous one, therefore, the function of "genOctave" generates octaves while genGaussianKernel function generates the kernels. And {\ref{2nd-3rd-oct}} is what the question is asking. The resolution of the second octave is 375 by 229 pixels while that of the third octave is 118 by 114 pixels. 
 \\
 \begin{figure}
 		\centering
@@ -622,12 +436,18 @@ Each octave is half the previous one therefore function of "genOctave" generates
   			\caption{Second and Third Octave}
   		\label{2nd-3rd-oct}
 \end{figure}
-The DoG images obtainted using the second and third octave are in fig:{\ref{2nd-3rd-dog}}
+The DoG images obtainted using the second and third octave are in fig:{\ref{2nd-3rd-dog} and \ref{2nd-3rd-dog-norm}}
 \begin{figure}
 		\centering
   			\fbox{\includegraphics[scale=0.9]{./dog_pyrmd.png}}
-  			\caption{Difference of Gaussians Pyramid}
+  			\caption{The difference of Gaussian Pyramid}
   		\label{2nd-3rd-dog}
+\end{figure}
+\begin{figure}
+		\centering
+  			\fbox{\includegraphics[scale=0.9]{./norm_dog.png}}
+  			\caption{Normalized Gaussian Pyramid}
+  		\label{2nd-3rd-dog-norm}
 \end{figure}
 \\
 We perform first three steps of keypoint detection and plot the results back on the input image, see Fig{\ref{keypoint-result}}
@@ -637,9 +457,9 @@ We perform first three steps of keypoint detection and plot the results back on 
   			\caption{Detected Keypoints on Original Image}
   		\label{keypoint-result}
 \end{figure}
-I think there are too many keypoints detected which are not relevant, I can see that in the top right corner, the keypoints are arranged perfectly on the branch, However, during areas of flat regions such as sky where everypoint is either a minima or a maxima we are having problems. Also, we havn't found subpixel keypoints. After doing these steps we could get a better result.
+I think there are too many key points detected which are not relevant, I can see that in the top right corner, the key points are arranged perfectly on the branch, However, during areas of flat regions such as sky where every point is either minimal or maxima we are having problems. Also, we haven't found subpixel key points. After doing these steps we could get a better result.
 \\
-The coordinates of the five left-most detected keypoints are(Format is (Height,Width) or (y,x)):
+The coordinates of the five left-most detected key points are(Format is (Height, Width) or (y,x)):
 \\
 (1,1),(1,24),(25,3),(4,28),(1,30)
 \\
@@ -647,52 +467,15 @@ The coordinates of the five left-most detected keypoints are(Format is (Height,W
 Footnote:
 \\
 \\
-I tried detecting the keypoints as well as I could. But I think that my convolution function is not quite right. I know the concept of keypoints detection and convolution, however, I was unable to implement it properly.
+I tried detecting the key points as well as I could. But I think that my convolution function is not quite right. I know the concept of keypoints detection and convolution, however, I was unable to implement it properly.
 \end{answered}
 		\item For the task of cursor detection, which aims to locate the cursor in an image, two sets of images and cursor templates, named as ”Set A” and ”Set B”, will be provided to you. Set A is composed of a total number of 25 images and 1 cursor template. Set A is for task 1., i.e., the basic cursor detection which contributes to 5 points. Set B is composed of a total number of 30 images and 3 different cursor template. Set B is for task 2.,
-\\
-i.e., which contributes to 3 bonus points.
-\\
-1. Detect cursors in Set A. [5 points]
-\\
-2. Detect cursors in Set B, which is more challenging. [3 bonus points]
-\\
-\\
-Note that we will randomly select and run the code you submitted on a set of 20 withheld images to test the
-performance of your cursor detection programs.
 \begin{answered}
 Method:
 \\
 \\
-In the start I have had tested my previous code of keypoint detection on this problem, however, I couldn't get good results. I also tried on pulling cv2.SIFT from github repository(SIFT in OpenCV 3 is contrib package due to patent rights). This process made me realize that Difference of Gaussians work better with template matching. Therefore, we need edges and template matching performs better with edges. This also made me understand the difference between Template matching and feature based methods. The main pecularity of features is that during feature based matching we have to match features which might be skewed. However, in this task, the cursor is free from transanslation invariance. Moreover, after looking at the dataset, it seems that we need scale invariance.
+In the start I have had tested my previous code of keypoint detection on this problem, however, I couldn't get good results. I also tried on pulling cv2.SIFT from GitHub repository(SIFT in OpenCV 3 is contrib package due to patent rights). This process made me realize that the Difference of Gaussians works better with template matching. Therefore, we need edges and template matching performs better with edges. This also made me understand the difference between Template matching and feature based methods. The main peculiarity of features is that during feature-based matching we have to match features which might be skewed. However, in this task, the cursor is free from translation invariance. Moreover, after looking at the dataset, it seems that we need to scale invariance.
 \\
-For scale invariance we are going to use what the Professor discussed about image stacks and resizing. We have two options to either resize the image or resize the template. However, if we sample the image and resize it it could happen that we might lose information.
-\\
-After comparing the performance of Laplacian and Canny on the given template, I hypothize that the result of canny would be better when pointer is behind different range of background due to the cursor wraped in one pixel boundary;See Fig.{\ref{wow-canny-wow}}. However, Canny is an edge detector, for an object like pointer it fails to detect it in some cases. See Fig.{\ref{canny-problem}}
-\\
-Therefore, I am taking Gaussian based approach for cursor detection.
-\\
-1. Basic Cursor Detection
-For basic Cursor Detection firstly I tried running it without any downscaling or upscaling of the template. There was a 20$\%$ accuracy on these methods. After using downscaling and upscaling of templates in my program, I was able to boost my accuracy and detect almost all the points in the the basic Cursors. The accuracy as on writing this reports stands on not detecting any of negative images 10/10 and detecting 78.57$\%$ of positive pointers, which is 11 out of 14. Only 3 pointers were not detected. See {\ref{wow-basic-wow} and \ref{why-basic-why} } I am using a threshold of 0.6 to detect the pointers.
-\begin{figure}
-		\centering
-  			\fbox{\includegraphics[scale=0.30]{./basic_cur_det.png}}
-  			\caption{An example of good detection of cursor}
-  		\label{wow-basic-wow}
-\end{figure}
-\begin{figure}
-		\centering
-  			\fbox{\includegraphics[scale=0.30]{./basic_cur_det_bad_case.png}}
-  			\caption{Template Detection Failed to Detect any cursor}
-  		\label{why-basic-why}
-\end{figure}
-\\
-\\
-2. Bonus Cursor Detection
-\\
-\\
-
-
 \begin{figure}
 		\centering
   			\fbox{\includegraphics[scale=0.30]{./Cannyafter3scalings.png}}
@@ -705,9 +488,105 @@ For basic Cursor Detection firstly I tried running it without any downscaling or
   			\caption{pos$\_$9.jpg Red box shows that canny is unable to detect the cursor(Inveted Image)}
   		\label{canny-problem}
 \end{figure}
+For scale invariance, we are going to use what the Professor discussed about image stacks and resizing. We have two options to either resize the image or resize the template. However, if we sample the image and resize it could happen that we might lose information.
+\\
+After comparing the performance of Laplacian and Canny on the given template, I hypothesize that the result of canny would be better when the pointer is behind a different range of background due to the cursor wrapped in one-pixel boundary; See Fig.{\ref{wow-canny-wow}}. However, Canny is an edge detector, for an object like pointer it fails to detect it in some cases. See Fig.{\ref{canny-problem}}
+\\
+Therefore, I am taking the Gaussian-based approach for cursor detection.
+\begin{figure}
+		\centering
+  			\fbox{\includegraphics[scale=1]{./template_basic.png}}
+  			\caption{Basic Cursor Detection Template}
+  		\label{basic-template}
+\end{figure}
+1. Basic Cursor Detection
+\\
+I am using the cursor template given in Fig{\ref{basic-template}} and using the TM$\_$CCOEFF$\_$NORMED method of opencv.
+\\
+For basic Cursor Detection firstly I tried running it without any downscaling or upscaling of the template. There was a 20$\%$ accuracy on these methods. After using downscaling and upscaling of templates in my program, I was able to boost my accuracy and detect almost all the points in the basic Cursors. The accuracy as on writing this reports stands on not detecting any of negative images 10/10 and detecting 78.57$\%$ of positive pointers, which is 11 out of 14. Only 3 pointers were not detected. See {\ref{wow-basic-wow} and \ref{why-basic-why} } I am using a threshold of 0.6 to detect the pointers.
+\begin{figure}
+		\centering
+  			\fbox{\includegraphics[scale=0.30]{./basic_cur_det.png}}
+  			\caption{An example of good detection of cursor}
+  		\label{wow-basic-wow}
+\end{figure}
+\begin{figure}
+		\centering
+  			\fbox{\includegraphics[scale=0.30]{./basic_cur_det_bad_case.png}}
+  			\caption{Template Detection Failed to Detect any cursor}
+  		\label{why-basic-why}
+\end{figure}
+2. Bonus Cursor Detection
+\begin{figure}
+		\centering
+  			\fbox{\includegraphics[scale=1]{./t1.jpg}}
+  			\caption{Template for first set in bonus images}
+  		\label{bonus1-template}
+\end{figure}
+The "t2" images so far give the best results, I was able to detect all the cursors from the images. However, the worst performance I got was by "t1" images, see
+\begin{figure}
+		\centering
+  			\fbox{\includegraphics[scale=1]{./t2.jpg}}
+  			\caption{Template for second set in bonus images}
+  		\label{bonus2-template}
+\end{figure}
+The third set of images "t3" also gives 100$\%$ accuracy, however, The bounding box is a bit small for some of the images, according to my program, the linspace starts with 1 and then decreases, which means this is a pure noise based match and for a large set of images it could suffer from salt and pepper noise, like we see in Fig{\ref{hand-cur-bad}}.
+\begin{figure}
+		\centering
+  			\fbox{\includegraphics[scale=1]{./t3_v2.jpg}}
+  			\caption{Template for third set in bonus images}
+  		\label{bonus3-template}
+\end{figure}
+The templates used for Bonus part are given in Fig\ref{bonus1-template},\ref{bonus2-template},\ref{bonus3-template}
+\begin{figure}
+		\centering
+  			\fbox{\includegraphics[scale=0.30]{./hand_cursor_worst_perf.jpg}}
+  			\caption{Example of hand cursor bad performance}
+  		\label{hand-cur-bad}
+\end{figure}
+Observations:
+Let's talk about the worst performance of some of the detections which I had. Firstly, the hand cursor one seems like when I apply the Gaussian the hand cursor is practically indistinguishable from the knob-like button which photoshop has.
+\\
+Furthermore, template matching is also prone to problems such as a patch over the image area where the template is located might affect its performance. 
+\\
+The functions used are:
+\begin{codelalala}
+\begin{verbatim}
+def matchTemplate(grayscaleImage,template):
+    import cv2,imutils,numpy as np
+    gaussianImage = cv2.GaussianBlur(grayscaleImage,(3,3),0)
+    lap = cv2.Laplacian(gaussianImage,ddepth=32,ksize = 3)
+    lapTemplate = cv2.Laplacian(template,ddepth=32,ksize=3)
+    maxValFound = 0
+    (storex,storey) = (0,0)
+    (xcords,ycords) = (0,0)
+    for downscale in np.linspace(1,0.5,20):
+        if(int(lapTemplate.shape[1]*downscale) > 1):
+            downscaledTemplate = imutils.resize(lapTemplate,
+            int(lapTemplate.shape[1]*downscale))        
+            a = cv2.matchTemplate(lap,downscaledTemplate,cv2.TM_CCOEFF_NORMED)
+            (_,maxVal,_,(xval,yval)) = cv2.minMaxLoc(a)
+            if maxVal > maxValFound:
+                maxValFound = maxVal
+                templateShape = np.shape(downscaledTemplate)
+                (storexp,storeyp) =  (storex,storey)
+                (storex,storey) = (xcords,ycords)
+                (xcords,ycords) = (xval,yval)
+    for upscale in np.linspace(2,1.02,20):
+        if(int(lapTemplate.shape[1]*upscale) > 1):
+            upscaledTemplate = imutils.resize(lapTemplate,
+            int(lapTemplate.shape[1]*upscale))
+            a = cv2.matchTemplate(lap,upscaledTemplate,cv2.TM_CCOEFF_NORMED)
+            (_,maxVal,_,(xval,yval)) = cv2.minMaxLoc(a)
+            if maxVal > maxValFound:
+                maxValFound = maxVal
+                templateShape = np.shape(downscaledTemplate)
+                (storexp,storeyp) =  (storex,storey)
+                (storex,storey) = (xcords,ycords)
+                (xcords,ycords) = (xval,yval)
+    return [maxValFound,templateShape,(xcords,ycords)]
+\end{verbatim}
+\end{codelalala}
 \end{answered}
 \end{QandA}
-	\begin{thebibliography}{1}
-							\bibitem{textbook} William Stallings, Lawrie Brown, Computer Security: Principles and Practice, 4th Edition
-	\end{thebibliography}
 \end{document}

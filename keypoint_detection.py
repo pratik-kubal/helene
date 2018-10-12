@@ -9,15 +9,8 @@ from functions import rgbToGrayscale,genOctave,convolve,genGaussianKernel,differ
 import cv2
 import numpy as np
 
-b = cv2.imread("./proj1_cse573/task2.jpg",0)
+a = cv2.imread("./proj1_cse573/task2.jpg")
 b = rgbToGrayscale(a)
-np.asarray(a)
-matA = np.asarray(matA)
-matA = matA.astype(np.uint8)
-cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-cv2.imshow('image',matA)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 scales=[[0.70710678118,1,1.41421356237,2,2.82842712475],
         [1.41421356237,2,2.82842712475,4,5.65685424949],
@@ -28,8 +21,6 @@ scales=[[0.70710678118,1,1.41421356237,2,2.82842712475],
 octave1 = b.copy()
 windowFilter = genGaussianKernel(scales,1,1)
 octave1_1 = convolve(windowFilter,octave1)
-octave1_1 = cv2.GaussianBlur(octave1,(7,7),0.70710678118)
-
 octave1_1_norm = np.asarray(octave1_1)
 cv2.imwrite("octave1_1_norm.jpg",octave1_1_norm)
 
@@ -159,6 +150,7 @@ cv2.imwrite("dog1_4_norm.jpg",dog1_4_norm)
 
 dog2_1 = differenceGaussians(octave2_1,octave2_2)
 dog2_1_norm = np.asarray(dog2_1)
+dog2_1_norm= n
 cv2.imwrite("dog2_1_norm.jpg",dog2_1_norm)
 
 dog2_2 = differenceGaussians(octave2_2,octave2_3)
@@ -207,11 +199,9 @@ cv2.imwrite("dog4_4_norm.jpg",dog4_4_norm)
 
 
 # Key Points detection
-
-a = cv2.imread("./proj1_cse573/task2.jpg")
 outputImage = a.copy()
 tracker = [];
-stack1_1 = [dog1_1,dog1_2,dog1_3]
+stack1_1 = [dog1_3,dog1_2,dog1_1]
 keypointsMat1_1 = findMinimaMaxima(stack1_1,outputImage,1,tracker)
 stack1_2 = [dog1_2,dog1_3,dog1_4]
 keypointsMat1_2 = findMinimaMaxima(stack1_2,outputImage,1,tracker)
@@ -230,10 +220,6 @@ stack4_1 = [dog4_1,dog4_2,dog4_3]
 keypointsMat2_1 = findMinimaMaxima(stack4_1,outputImage,8,tracker)
 stack4_2 = [dog4_2,dog4_3,dog4_4]
 keypointsMat4_2 = findMinimaMaxima(stack4_2,outputImage,8,tracker)
-cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-cv2.imshow('image',outputImage)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 cv2.imwrite("keypoints.jpg",outputImage)
 ecl_distance_sort = sorted(tracker,key=ecl_distance)
@@ -241,4 +227,10 @@ print("Closest five points are:")
 print("Format is (Height,Width) or (y,x)")
 print(ecl_distance_sort[0:5])
 
-cv2.imwrite("dog2_4.jpg",np.asarray(normImage(dog2_4))*255)
+
+cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+cv2.imshow('image',np.asarray(normImage(dog2_2)))
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+cv2.imwrite("dog2_2.jpg",np.asarray(normImage(dog2_2))*255)
